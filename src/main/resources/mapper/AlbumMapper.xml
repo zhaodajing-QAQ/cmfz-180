@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao.AlbumDao">
+    <!--查询-->
+    <select id="selectAll" resultType="Album">
+        select id,title,img,score,author,broadcaster,count,brief,create_Date,status,other from album limit #{start},#{rows}
+    </select>
+    <!--增加-->
+    <insert id="insertAlbum" parameterType="Album">
+        insert into album values (#{id},#{title},#{img},#{score},#{author},#{broadcaster},#{count},#{brief},#{create_Date},#{status},#{other})
+    </insert>
+    <!--修改-->
+    <update id="updateAlbum" parameterType="Album">
+        update album
+        <set>
+            <if test="title!=null">title=#{title},</if>
+            <if test="img!=null">img=#{img},</if>
+            <if test="score!=null">score=#{score},</if>
+            <if test="author!=null">author=#{author},</if>
+            <if test="broadcaster!=null">broadcaster=#{broadcaster},</if>
+            <if test="count!=null">count=#{count},</if>
+            <if test="brief!=null">brief=#{brief},</if>
+            <if test="create_Date!=null">create_Date=#{create_Date},</if>
+            <if test="status!=null">status=#{status},</if>
+            <if test="other!=null">other=#{other}</if>
+        </set>
+        where id = #{id}
+    </update>
+    <!--删除-->
+    <delete id="deleteAlbum" parameterType="String">
+        delete from album where id in
+        <foreach collection="array" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    <!--查询总条数-->
+    <select id="selectCount" resultType="int">
+      select count(*) from album
+    </select>
+    <!--通过id查询-->
+    <select id="selectById" parameterType="String" resultType="Album">
+        select id,title,img,score,author,broadcaster,count,brief,create_Date,status,other from album where id = #{id}
+    </select>
+    <!--查询全部-->
+    <select id="selectAllAlbum" resultType="Album">
+        select id,title,img,score,author,broadcaster,count,brief,create_Date,status,other from album
+    </select>
+</mapper>
