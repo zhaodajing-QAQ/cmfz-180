@@ -33,8 +33,8 @@ public class UserTest {
     @Test
     public void test2(){
         User user = new User();
-        user.setId("19");
-        user.setAddress("北京");
+        user.setId("22");
+        user.setAddress("山西");
         user.setCreateDate(new Date());
         int i = userService.addUser(user);
         System.out.println(i);
@@ -45,5 +45,11 @@ public class UserTest {
         User user = new User();
         user.setId("25");
         userDao.deleteByPrimaryKey("25");
+    }
+
+    @Test
+    public void test5(){
+        List<MapDto> mapDtos = userService.selectSevenRegister();
+        String s = mapDtos.toString();
     }
 }

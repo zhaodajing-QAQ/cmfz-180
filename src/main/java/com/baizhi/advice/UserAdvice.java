@@ -30,7 +30,7 @@ public class UserAdvice {
         List<MapDto> mapDtos1 = userService.selectYearRegister();
 
 
-        /*List<Integer> day = new ArrayList<Integer>();
+        List<Integer> day = new ArrayList<Integer>();
         for (MapDto mapDto : mapDtos) {
             day.add(mapDto.getValue());
         }
@@ -38,11 +38,11 @@ public class UserAdvice {
         List<Integer> month = new ArrayList<Integer>();
         for (MapDto mapDto : mapDtos1) {
             month.add(mapDto.getValue());
-        }*/
+        }
 
 
         GoEasy goEasy = new GoEasy("http://rest-hangzhou.goeasy.io", "BC-f68d6b29c552443e9fc0725979b37a51");
-        goEasy.publish("day", mapDtos.toString());
-        goEasy.publish("month", mapDtos1.toString());
+        goEasy.publish("day", day.toString());
+        goEasy.publish("month", month.toString());
     }
 }

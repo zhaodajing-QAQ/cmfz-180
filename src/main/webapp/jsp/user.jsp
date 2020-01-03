@@ -151,6 +151,7 @@
             $.post(
                 "${pageContext.request.contextPath}/user/getSevenData",
                 function (data) {
+                    console.log(data);
                     for(var i = 0;i<data.length;i++) {
                         day.push(data[i].name)
                         count.push(data[i].value)
@@ -169,19 +170,10 @@
             goEasy.subscribe({
                 channel: "day", //替换为您自己的channel
                 onMessage: function (message) {
-                    console.log(message.content);;
-                    //var data = JSON.parse(message.content);
-                    for(var i = 0;i<data.length;i++) {
-                        day.push(data[i].name)
-                        count.push(data[i].value)
-                    }
-                    console.log(data);
+                    var data = JSON.parse(message.content);
                     myChart.setOption({
-                        xAxis: {
-                            data: day
-                        },
                         series: [{
-                            data:count
+                            data:data
                         }]
                     });
                 }
@@ -211,10 +203,10 @@
             goEasy.subscribe({
                 channel: "month", //替换为您自己的channel
                 onMessage: function (message) {
-                    /*var parse = JSON.parse(message.content);*/
+                    var data = JSON.parse(message.content);
                     myChart2.setOption({
                         series: [{
-                            data:parse
+                            data:data
                         }]
                     });
                 }
